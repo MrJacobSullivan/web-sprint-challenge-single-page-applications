@@ -8,9 +8,15 @@ import Confirmation from './pages/Confirmation'
 export default function App() {
   return (
     <Layout>
-      <Route exact path='/' component={Home} />
-      <Route path='/order' component={Order} />
-      <Route path='/confirmation' component={Confirmation} />
+      <Route exact path='/'>
+        <Home />
+      </Route>
+      <Route path='/order'>
+        <Order />
+      </Route>
+      <Route path='/confirmation'>
+        <Confirmation />
+      </Route>
     </Layout>
   )
 }

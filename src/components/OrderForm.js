@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import styled from 'styled-components'
+import { useHistory } from 'react-router-dom'
 import axios from 'axios'
 import * as yup from 'yup'
 import schema from '../validation/schema'
@@ -31,6 +31,8 @@ export default function OrderForm() {
   const [errors, setErrors] = useState(initialErrors)
   const [disabled, setDisabled] = useState(true)
 
+  const history = useHistory()
+
   const validate = (name, value) => {
     yup
       .reach(schema, name)
@@ -60,8 +62,13 @@ export default function OrderForm() {
       .post(POST_URL, order)
       .then((res) => {
         console.log(res.data)
+        // return res.data.id
+        history.push(`/confirmation?order-id=${res.data.id}`)
       })
-      .catch((err) => console.error(err))
+      // .then((id) => {
+      //   history.push(`/confirmation/${id}`)
+      // })
+      .catch((err) => console.error('Server Error', err))
       .finally(() => {})
   }
 
@@ -193,9 +200,10 @@ export default function OrderForm() {
           <h3>Order Details</h3>
           <label>
             Special Instructions
-            <input
-              type='text'
+            <textarea
               name='special'
+              rows='4'
+              cols='50'
               value={values.special}
               onChange={handleChange}
               id='special-text'
