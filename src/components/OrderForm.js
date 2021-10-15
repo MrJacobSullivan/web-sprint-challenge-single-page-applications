@@ -28,7 +28,17 @@ export default function OrderForm() {
   const [errors, setErrors] = useState(initialErrors)
   const [disabled, setDisabled] = useState(true)
 
-  const validate = (name, value) => {}
+  const validate = (name, value) => {
+    yup
+      .reach(schema, name)
+      .validate(value)
+      .then(() => {
+        setErrors((prev) => ({ ...prev, [name]: '' }))
+      })
+      .catch((err) => {
+        setErrors((prev) => ({ ...prev, [name]: err.errors[0] }))
+      })
+  }
 
   const handleChange = (event) => {
     const { name, value, checked, type } = event.target
