@@ -32,6 +32,7 @@ export default function OrderForm() {
   const [values, setValues] = useState(initialValues)
   const [errors, setErrors] = useState(initialErrors)
   const [disabled, setDisabled] = useState(true)
+  const [orderId, setOrderId] = useState('')
   const [submissionError, setSubmissionError] = useState(false)
 
   // react-router-dom history to push to /configmation on submit
@@ -70,12 +71,14 @@ export default function OrderForm() {
     axios
       .post(POST_URL, order)
       .then((res) => {
-        history.push(`/confirmation?order-id=${res.data.id}`)
+        return res.data
       })
-      .catch((err) => {
-        console.error('Server Error', err)
-        setSubmissionError(() => true)
+      .then((data) => {
+        history.push(`/confirmation?order-id=${data.id}`)
       })
+      .catch((err) => console.log(err))
+
+    setSubmissionError(() => true)
   }
 
   // construct order data

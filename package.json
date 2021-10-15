@@ -19,6 +19,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "local-test": "react-scripts test src/_tests_/mvp.test.js",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {

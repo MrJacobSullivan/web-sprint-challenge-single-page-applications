@@ -96,8 +96,8 @@ After finishing your required elements, you can push your work further. These go
 - [ ] Toggle form component for gluten free crust
 - [ ] Turn form element sections into nested routes
 - [ ] Test more of the application with Cypress
-- [ ] Build UI for the eventuality of a network error when POSTing the order
-- [ ] Add functionality to your order button that it leads to a Congrats! Pizza is on it's way! page **and** returns a database record of the whole order
+- [x] Build UI for the eventuality of a network error when POSTing the order
+- [x] Add functionality to your order button that it leads to a Congrats! Pizza is on it's way! page **and** returns a database record of the whole order
 
 ## FAQs
 
@@ -116,4 +116,4 @@ Follow these steps for completing your project.
 
 Set up your fork on Github to codegrade following the instructions [here](https://lambdaschool.instructure.com/courses/1675/assignments/51399?module_item_id=617624), pushing commits to your main branch.
 
-- [ ] Your code will be reviewed over the next few days. Read [these instructions](https://www.notion.so/How-to-View-Feedback-in-CodeGrade-c5147cee220c4044a25de28bcb6bb54a) to learn how to view feedback in CodeGrade.
+- [x] Your code will be reviewed over the next few days. Read [these instructions](https://www.notion.so/How-to-View-Feedback-in-CodeGrade-c5147cee220c4044a25de28bcb6bb54a) to learn how to view feedback in CodeGrade.
