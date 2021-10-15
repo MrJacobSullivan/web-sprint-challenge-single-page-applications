@@ -29,7 +29,21 @@ describe('Order Form', () => {
     submitButton().should('exist')
   })
 
-  describe('initial form values', () => {
+  describe('initial form state', () => {
+    it('should initialize form values with proper initial state', () => {
+      nameInput().should('have.value', '')
+      sizeSelect().should('have.value', '')
+      pepperoniInput().should('not.be.checked')
+      sausageInput().should('not.be.checked')
+      canadianBaconInput().should('not.be.checked')
+      spicyItalianSausageInput().should('not.be.checked')
+      grilledChickenInput().should('not.be.checked')
+      glutenFreeInput().should('not.be.checked')
+      specialInput().should('have.value', '')
+      quantityInput().should('have.value', 1)
+      submitButton().should('exist')
+    })
+
     it('should initialize with submit button disabled', () => {
       submitButton().should('be.disabled')
     })
