@@ -28,7 +28,19 @@ export default function OrderForm() {
   const [errors, setErrors] = useState(initialErrors)
   const [disabled, setDisabled] = useState(true)
 
-  const handleChange = (event) => {}
+  const validate = (name, value) => {}
+
+  const handleChange = (event) => {
+    const { name, value, checked, type } = event.target
+    const valueToUse = type === 'checkbox' ? checked : value
+
+    validate(name, valueToUse)
+
+    setValues((prev) => ({
+      ...prev,
+      [name]: valueToUse,
+    }))
+  }
 
   return (
     <form id='pizza-form'>
