@@ -63,4 +63,22 @@ describe('Order Form', () => {
       quantityInput().clear().type('2').should('have.value', '2')
     })
   })
+
+  // describe('Validating form input', () => {})
+
+  describe('Submitting form', () => {
+    beforeEach(() => {
+      nameInput().type('Test')
+      sizeSelect().select('small')
+    })
+
+    it('should enable submit button upon validation', () => {
+      submitButton().should('be.enabled')
+    })
+
+    it('should route to confirmation page on submission', () => {
+      submitButton().click()
+      cy.url().should('include', '/confirmation?order-id=')
+    })
+  })
 })
