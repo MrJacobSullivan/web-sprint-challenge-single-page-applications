@@ -32,7 +32,6 @@ export default function OrderForm() {
   const [values, setValues] = useState(initialValues)
   const [errors, setErrors] = useState(initialErrors)
   const [disabled, setDisabled] = useState(true)
-  const [orderId, setOrderId] = useState('')
   const [submissionError, setSubmissionError] = useState(false)
 
   // react-router-dom history to push to /configmation on submit
@@ -66,25 +65,26 @@ export default function OrderForm() {
     }))
   }
 
-  // post order data to POST_URL defined in ~/src/config
-  const postOrder = (order) => {
-    axios
-      .post(POST_URL, order)
-      .then((res) => {
-        return res.data
-      })
-      .then((data) => {
-        history.push(`/confirmation?order-id=${data.id}`)
-      })
-      .catch((err) => console.log(err))
+  // push to router history confirmation page for id
+  const routeToConfirmation = (id) => {
+    history.push(`/confirmation?order-id=${id}`)
+  }
 
-    setSubmissionError(() => true)
+  // post order data to POST_URL defined in ~/src/config
+  const postOrder = async (order) => {
+    try {
+      const res = await axios.post(POST_URL, order)
+      return res.data
+    } catch (err) {
+      setSubmissionError(() => true)
+      return false
+    }
   }
 
   // construct order data
   // post order to server
   // reset form values
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault()
     setSubmissionError(() => false) // reset back to false if trying to resubmit
 
@@ -104,7 +104,9 @@ export default function OrderForm() {
       quantity: values.quantity,
     }
 
-    postOrder(orderData)
+    // post order, get back db record, route to confirmation page sending db record id
+    const databaseRecord = await postOrder(orderData)
+    if (databaseRecord) routeToConfirmation(databaseRecord.id)
   }
 
   // checks if button can be enabled every time an input is changed
