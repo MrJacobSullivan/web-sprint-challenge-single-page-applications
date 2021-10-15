@@ -5,7 +5,7 @@ import Home from './pages/Home'
 import Order from './pages/Order'
 import Confirmation from './pages/Confirmation'
 
-const App = () => {
+export default function App() {
   return (
     <Layout>
       <Route exact path='/' component={Home} />
@@ -14,4 +14,3 @@ const App = () => {
     </Layout>
   )
 }
-export default App
