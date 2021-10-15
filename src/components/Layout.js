@@ -6,6 +6,7 @@ const AppContainer = styled.div`
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  margin-bottom: 5%;
 
   background: ${({ theme }) => theme.light};
   color: ${({ theme }) => theme.dark};

@@ -18,6 +18,8 @@ const OrderPage = styled.div`
       margin-top: 1%;
       display: flex;
       flex-direction: column;
+      background: white;
+      padding: 2%;
 
       * {
         padding-top: 0.625%;
@@ -29,8 +31,8 @@ const OrderPage = styled.div`
       }
 
       span {
-        color: red;
         font-size: 0.8rem;
+        color: ${({ theme }) => theme.red};
       }
 
       label {
