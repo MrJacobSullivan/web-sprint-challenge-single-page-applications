@@ -1,17 +1,19 @@
 import { useState, useEffect } from 'react'
 import styled from 'styled-components'
+import axios from 'axios'
 import * as yup from 'yup'
 import schema from '../validation/schema'
+import { POST_URL } from '../config'
 
 const initialValues = {
   name: '',
   size: '',
   pepperoni: false,
   sausage: false,
-  'canadian-bacon': false,
-  'spicy-italian-sausage': false,
-  'grilled-chicken': false,
-  'gluten-free': false,
+  canadianBacon: false,
+  spicyItalianSausage: false,
+  grilledChicken: false,
+  glutenFree: false,
   special: '',
   quantity: 1,
 }
@@ -53,6 +55,16 @@ export default function OrderForm() {
     }))
   }
 
+  const postOrder = (order) => {
+    axios
+      .post(POST_URL, order)
+      .then((res) => {
+        console.log(res.data)
+      })
+      .catch((err) => console.error(err))
+      .finally(() => {})
+  }
+
   const handleSubmit = (event) => {
     event.preventDefault()
 
@@ -63,16 +75,16 @@ export default function OrderForm() {
       // toppings
       pepperoni: values.pepperoni,
       sausage: values.sausage,
-      'canadian-bacon': values['canadian-bacon'],
-      'spicy-italian-sausage': values['spicy-italian-sausage'],
-      'grilled-chicken': values['grilled-chicken'],
+      canadianBacon: values.canadianBacon,
+      spicyItalianSausage: values.spicyItalianSausage,
+      grilledChicken: values.grilledChicken,
 
-      'gluten-free': values['gluten-free'],
+      glutenFree: values.glutenFree,
       special: values.special,
       quantity: values.quantity,
     }
 
-    console.log(orderData)
+    postOrder(orderData)
 
     setValues(() => initialValues)
   }
@@ -137,8 +149,8 @@ export default function OrderForm() {
           Canadian Bacon
           <input
             type='checkbox'
-            name='canadian-bacon'
-            checked={values['canadian-bacon']}
+            name='canadianBacon'
+            checked={values.canadianBacon}
             onChange={handleChange}
           />
         </label>
@@ -146,8 +158,8 @@ export default function OrderForm() {
           Spicy Italian Sausage
           <input
             type='checkbox'
-            name='spicy-italian-sausage'
-            checked={values['spicy-italian-sausage']}
+            name='spicyItalianSausage'
+            checked={values.spicyItalianSausage}
             onChange={handleChange}
           />
         </label>
@@ -155,8 +167,8 @@ export default function OrderForm() {
           Grilled Chicken
           <input
             type='checkbox'
-            name='grilled-chicken'
-            checked={values['grilled-chicken']}
+            name='grilledChicken'
+            checked={values.grilledChicken}
             onChange={handleChange}
           />
         </label>
@@ -166,11 +178,11 @@ export default function OrderForm() {
         <h3>Other Options</h3>
         <span>Not Required</span>
         <label>
-          Gluten-Free
+          Gluten Free
           <input
             type='checkbox'
-            name='gluten-free'
-            checked={values['gluten-free']}
+            name='glutenFree'
+            checked={values.glutenFree}
             onChange={handleChange}
           />
         </label>
