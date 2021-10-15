@@ -1,6 +1,6 @@
 describe('Order Form', () => {
   beforeEach(() => {
-    cy.visit('http://localhost:3000/order')
+    cy.visit('http://localhost:3000/pizza')
   })
 
   const nameInput = () => cy.get('input[name=name]')

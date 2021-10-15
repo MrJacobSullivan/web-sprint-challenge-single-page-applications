@@ -34,7 +34,7 @@ export default function Header() {
         <h1>Lambda Eats</h1>
         <nav>
           <Link to='/'>Home</Link>
-          <Link to='/order' id='order-pizza'>
+          <Link to='/pizza' id='order-pizza'>
             Order
           </Link>
         </nav>
