@@ -1,21 +1,45 @@
+import { useState } from 'react'
+import styled from 'styled-components'
+
+const FormComponent = styled.label``
+const RequiredText = styled.span``
+
+const initialFormValues = {
+  size: '',
+  sauce: '',
+  toppings: [],
+  glutenFree: false,
+  instructions: '',
+  quantity: 1,
+}
+
+const initialErrors = {
+  size: '',
+  sauce: '',
+  toppings: '',
+  glutenFree: '',
+  instructions: '',
+  quantity: '',
+}
+
 export default function OrderForm() {
+  const [formValue, setFormValues] = useState(initialFormValues)
+  const [errors, setErrors] = useState(initialErrors)
+  const [disabled, setDisabled] = useState(true)
+
   return (
     <form id='pizza-form'>
       <h2>Build Your Own Pizza</h2>
 
-      <section>
-        <div>
-          <h3>Choice of Size</h3>
-          <p>Required</p>
-        </div>
-        <div>
-          <select name='size' id='size-dropdown'>
-            <option value='small'>Small</option>
-            <option value='medium'>Medium</option>
-            <option value='large'>Large</option>
-          </select>
-        </div>
-      </section>
+      <FormComponent>
+        Choice of Size
+        <RequiredText>Required</RequiredText>
+        <select name='size' id='size-dropdown'>
+          <option value='small'>Small</option>
+          <option value='medium'>Medium</option>
+          <option value='large'>Large</option>
+        </select>
+      </FormComponent>
 
       <section>
         <div>
