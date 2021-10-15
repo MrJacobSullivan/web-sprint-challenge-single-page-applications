@@ -1,7 +1,9 @@
+import PageContainer from '../components/Page'
+
 export default function Confirmation() {
   return (
-    <div>
+    <PageContainer>
       <h2>Confirmation</h2>
-    </div>
+    </PageContainer>
   )
 }
