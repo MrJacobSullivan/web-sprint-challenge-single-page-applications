@@ -151,7 +151,6 @@ export default function OrderForm() {
 
       <section>
         <h3>Add Toppings</h3>
-        <span>Choose up to 3</span>
         <span id='errors-toppings'>{errors.toppings}</span>
         <label>
           Pepperoni
@@ -197,7 +196,6 @@ export default function OrderForm() {
 
       <section>
         <h3>Other Options</h3>
-        <span>Not Required</span>
         <label>
           Gluten Free
           <input
