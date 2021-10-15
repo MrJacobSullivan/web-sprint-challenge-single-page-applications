@@ -6,7 +6,7 @@ const schema = yup.object().shape({
     .trim()
     .required('Name is required')
     .min(2, 'name must be at least 2 characters'),
-  size: yup.string().required(),
+  size: yup.string().required('Size is required'),
   pepperoni: yup.boolean(),
   sausage: yup.boolean(),
   canadianBacon: yup.boolean(),

@@ -64,7 +64,39 @@ describe('Order Form', () => {
     })
   })
 
-  // describe('Validating form input', () => {})
+  describe('Validating form input', () => {
+    it('should only allow valid name input', () => {
+      // name is required
+      nameInput().type('T').clear()
+      cy.get('#errors-name').should('have.text', 'Name is required')
+
+      // name must be 2 characters or longer
+      nameInput().type('T')
+      cy.get('#errors-name').should('have.text', 'name must be at least 2 characters')
+    })
+
+    it('should require a size choice', () => {
+      sizeSelect().select('small').select('')
+      cy.get('#errors-size').should('have.text', 'Size is required')
+    })
+
+    it('should not allow special instructions longer than 120 characters', () => {
+      // generates string of text
+      const generateText = (length) => {
+        return [...Array(length).keys()].reduce((agg) => agg + 'a', '')
+      }
+
+      const testInput = generateText(121)
+
+      specialInput().type(testInput)
+      cy.get('#errors-special').should('have.text', 'instructions must be less than 120 characters')
+    })
+
+    it('should not allow quantity less than 1', () => {
+      quantityInput().clear().type('0')
+      cy.get('#errors-quantity').should('have.text', 'quantity must be at least 1')
+    })
+  })
 
   describe('Submitting form', () => {
     beforeEach(() => {

@@ -107,7 +107,7 @@ export default function OrderForm() {
       <section>
         <h3>Order Details</h3>
         <span>Required</span>
-        <span>{errors.name}</span>
+        <span id='errors-name'>{errors.name}</span>
         <label>
           Name
           <input
@@ -123,7 +123,7 @@ export default function OrderForm() {
       <section>
         <h3>Choice of Size</h3>
         <span>Required</span>
-        <span>{errors.size}</span>
+        <span id='errors-size'>{errors.size}</span>
         <label>
           Size
           <select name='size' value={values.size} onChange={handleChange} id='size-dropdown'>
@@ -138,7 +138,7 @@ export default function OrderForm() {
       <section>
         <h3>Add Toppings</h3>
         <span>Choose up to 3</span>
-        <span>{errors.toppings}</span>
+        <span id='errors-toppings'>{errors.toppings}</span>
         <label>
           Pepperoni
           <input
@@ -209,7 +209,7 @@ export default function OrderForm() {
               id='special-text'
             />
           </label>
-          <span>{errors.special}</span>
+          <span id='errors-special'>{errors.special}</span>
         </div>
 
         <div>
@@ -217,7 +217,7 @@ export default function OrderForm() {
             Quantity
             <input type='number' name='quantity' value={values.quantity} onChange={handleChange} />
           </label>
-          <span>{errors.quantity}</span>
+          <span id='errors-quantity'>{errors.quantity}</span>
         </div>
 
         <div>
