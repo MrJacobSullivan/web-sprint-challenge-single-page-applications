@@ -5,6 +5,7 @@ import * as yup from 'yup'
 import schema from '../validation/schema'
 import { POST_URL } from '../config'
 
+// initial form values
 const initialValues = {
   name: '',
   size: '',
@@ -27,12 +28,17 @@ const initialErrors = {
 }
 
 export default function OrderForm() {
+  // form values, errors, and submit button state
   const [values, setValues] = useState(initialValues)
   const [errors, setErrors] = useState(initialErrors)
   const [disabled, setDisabled] = useState(true)
+  const [submissionError, setSubmissionError] = useState(false)
 
+  // react-router-dom history to push to /configmation on submit
   const history = useHistory()
 
+  // use yup and schema to validate entry on input
+  // set and unset errors based on validation
   const validate = (name, value) => {
     yup
       .reach(schema, name)
@@ -45,6 +51,8 @@ export default function OrderForm() {
       })
   }
 
+  // updated values state on change
+  // validates input using validate function
   const handleChange = (event) => {
     const { name, value, checked, type } = event.target
     const valueToUse = type === 'checkbox' ? checked : value
@@ -57,17 +65,25 @@ export default function OrderForm() {
     }))
   }
 
+  // post order data to POST_URL defined in ~/src/config
   const postOrder = (order) => {
     axios
       .post(POST_URL, order)
       .then((res) => {
-        // history.push(`/confirmation?order-id=${res.data.id}`)
+        history.push(`/confirmation?order-id=${res.data.id}`)
       })
-      .catch((err) => console.error('Server Error', err))
+      .catch((err) => {
+        console.error('Server Error', err)
+        setSubmissionError(() => true)
+      })
   }
 
+  // construct order data
+  // post order to server
+  // reset form values
   const handleSubmit = (event) => {
     event.preventDefault()
+    setSubmissionError(() => false) // reset back to false if trying to resubmit
 
     const orderData = {
       name: values.name.trim(),
@@ -86,10 +102,9 @@ export default function OrderForm() {
     }
 
     postOrder(orderData)
-
-    setValues(() => initialValues)
   }
 
+  // checks if button can be enabled every time an input is changed
   useEffect(() => {
     schema.isValid(values).then((valid) => setDisabled(() => !valid))
   }, [values])
@@ -220,6 +235,8 @@ export default function OrderForm() {
           </button>
         </div>
       </section>
+
+      {submissionError && <p>Submission Error!</p>}
     </form>
   )
 }
