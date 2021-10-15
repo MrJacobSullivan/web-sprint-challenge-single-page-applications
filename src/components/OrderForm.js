@@ -233,13 +233,13 @@ export default function OrderForm() {
         </div>
 
         <div>
+          <span>{submissionError && 'Server Error! Try again!'}</span>
+
           <button disabled={disabled} id='order-button'>
             Place Order
           </button>
         </div>
       </section>
-
-      {submissionError && <p>Submission Error!</p>}
     </form>
   )
 }
