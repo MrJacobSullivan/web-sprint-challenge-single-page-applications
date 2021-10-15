@@ -1,25 +1,26 @@
 import { useState } from 'react'
 import styled from 'styled-components'
-
-const FormComponent = styled.label``
-const RequiredText = styled.span``
+import * as yup from 'yup'
+import schema from '../validation/schema'
 
 const initialFormValues = {
+  name: '',
   size: '',
-  sauce: '',
-  toppings: [],
+  pepperoni: false,
+  sausage: false,
+  'canadian-bacon': false,
+  'spicy-italian-sausage': false,
+  'grilled-chicken': false,
   glutenFree: false,
   instructions: '',
   quantity: 1,
 }
 
 const initialErrors = {
-  size: '',
-  sauce: '',
-  toppings: '',
-  glutenFree: '',
-  instructions: '',
-  quantity: '',
+  name: '', // required and greater than 2
+  size: '', // required
+  toppings: '', // no more than 3
+  instructions: '', // no longer than 120
 }
 
 export default function OrderForm() {
@@ -31,59 +32,81 @@ export default function OrderForm() {
     <form id='pizza-form'>
       <h2>Build Your Own Pizza</h2>
 
-      <FormComponent>
-        Choice of Size
-        <RequiredText>Required</RequiredText>
-        <select name='size' id='size-dropdown'>
-          <option value='small'>Small</option>
-          <option value='medium'>Medium</option>
-          <option value='large'>Large</option>
-        </select>
-      </FormComponent>
-
       <section>
-        <div>
-          <h3>Choice of Sauce</h3>
-          <p>Required</p>
-        </div>
-        <div>{/* radio buttons */}</div>
+        <h3>Order Details</h3>
+        <span>Required</span>
+        <span>{errors.name}</span>
+        <label>
+          Name
+          <input type='text' name='name' id='name-input' />
+        </label>
       </section>
 
       <section>
-        <div>
-          <h3>Add Toppings</h3>
-          <p>Choose up to 10</p>
-        </div>
-        <div>{/* checkboxes */}</div>
+        <h3>Choice of Size</h3>
+        <span>Required</span>
+        <span>{errors.size}</span>
+        <label>
+          Size
+          <select name='size' id='size-dropdown'>
+            <option value='small'>Small</option>
+            <option value='medium'>Medium</option>
+            <option value='large'>Large</option>
+          </select>
+        </label>
       </section>
 
       <section>
-        <div>
-          <h3>Choice of Substitute</h3>
-          <p>Choose up to 1</p>
-        </div>
-        <div>{/* toggle button */}</div>
+        <h3>Add Toppings</h3>
+        <span>Choose up to 3</span>
+        <span>{errors.toppings}</span>
+        <label>
+          Pepperoni
+          <input type='checkbox' name='pepperoni' />
+        </label>
+        <label>
+          Sausage
+          <input type='checkbox' name='sausage' />
+        </label>
+        <label>
+          Canadian Bacon
+          <input type='checkbox' name='canadian-bacon' />
+        </label>
+        <label>
+          Spicy Italian Sausage
+          <input type='checkbox' name='spicy-italian-sausage' />
+        </label>
+        <label>
+          Grilled Chicken
+          <input type='checkbox' name='grilled-chicken' />
+        </label>
       </section>
 
       <section>
-        <div>
-          <h3>Special Instructions</h3>
-        </div>
-        <div>{/* text box */}</div>
+        <h3>Other Options</h3>
+        <span>Not Required</span>
+        <label>
+          Gluten-Free
+          <input type='checkbox' />
+        </label>
       </section>
 
       <section>
         <div>
           <h3>Order Details</h3>
-          <p>Required</p>
+          <label>
+            Special Instructions
+            <input type='text' id='special-text' />
+          </label>
         </div>
-        <div>
-          <input type='text' name='name' id='name-input' />
-        </div>
-      </section>
 
-      <section>
-        <div>{/* quantity input */}</div>
+        <div>
+          <label>
+            Quantity
+            <input type='number' name='quantity' />
+          </label>
+        </div>
+
         <div>
           <button>Place Order</button>
         </div>
