@@ -23,6 +23,14 @@ const HeaderContainer = styled.header`
       font-size: 1.2rem;
       justify-content: space-around;
       width: 25%;
+
+      * {
+        transition: 2ms;
+      }
+
+      a:hover {
+        color: ${({ theme }) => theme.blue};
+      }
     }
   }
 `
