@@ -61,15 +61,9 @@ export default function OrderForm() {
     axios
       .post(POST_URL, order)
       .then((res) => {
-        console.log(res.data)
-        // return res.data.id
-        history.push(`/confirmation?order-id=${res.data.id}`)
+        // history.push(`/confirmation?order-id=${res.data.id}`)
       })
-      // .then((id) => {
-      //   history.push(`/confirmation/${id}`)
-      // })
       .catch((err) => console.error('Server Error', err))
-      .finally(() => {})
   }
 
   const handleSubmit = (event) => {
@@ -221,7 +215,9 @@ export default function OrderForm() {
         </div>
 
         <div>
-          <button disabled={disabled} id='order-button'>Place Order</button>
+          <button disabled={disabled} id='order-button'>
+            Place Order
+          </button>
         </div>
       </section>
     </form>
