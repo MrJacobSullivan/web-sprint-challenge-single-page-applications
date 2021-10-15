@@ -29,7 +29,7 @@ describe('Order Form', () => {
     submitButton().should('exist')
   })
 
-  describe('initial form state', () => {
+  describe('Initial form state', () => {
     it('should initialize form values with proper initial state', () => {
       nameInput().should('have.value', '')
       sizeSelect().should('have.value', '')
@@ -40,12 +40,27 @@ describe('Order Form', () => {
       grilledChickenInput().should('not.be.checked')
       glutenFreeInput().should('not.be.checked')
       specialInput().should('have.value', '')
-      quantityInput().should('have.value', 1)
+      quantityInput().should('have.value', '1')
       submitButton().should('exist')
     })
 
     it('should initialize with submit button disabled', () => {
       submitButton().should('be.disabled')
+    })
+  })
+
+  describe('Form input', () => {
+    it('should allow for input', () => {
+      nameInput().type('Test').should('have.value', 'Test')
+      sizeSelect().select('small').should('have.value', 'small')
+      pepperoniInput().check().should('be.checked')
+      sausageInput().check().should('be.checked')
+      canadianBaconInput().check().should('be.checked')
+      spicyItalianSausageInput().check().should('be.checked')
+      grilledChickenInput().check().should('be.checked')
+      glutenFreeInput().check().should('be.checked')
+      specialInput().type('Test').should('have.value', 'Test')
+      quantityInput().clear().type('2').should('have.value', '2')
     })
   })
 })
