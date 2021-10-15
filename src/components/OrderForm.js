@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import * as yup from 'yup'
 import schema from '../validation/schema'
@@ -21,6 +21,7 @@ const initialErrors = {
   size: '', // required
   toppings: '', // no more than 3
   instructions: '', // no longer than 120
+  quantity: '', // not less than 1
 }
 
 export default function OrderForm() {
@@ -52,8 +53,18 @@ export default function OrderForm() {
     }))
   }
 
+  const handleSubmit = (event) => {
+    event.preventDefault()
+
+    setValues(() => initialValues)
+  }
+
+  useEffect(() => {
+    schema.isValid(values).then((valid) => setDisabled(() => !valid))
+  }, [values])
+
   return (
-    <form id='pizza-form'>
+    <form onSubmit={handleSubmit} id='pizza-form'>
       <h2>Build Your Own Pizza</h2>
 
       <section>
@@ -160,6 +171,7 @@ export default function OrderForm() {
               id='special-text'
             />
           </label>
+          <span>{errors.instructions}</span>
         </div>
 
         <div>
@@ -167,10 +179,11 @@ export default function OrderForm() {
             Quantity
             <input type='number' name='quantity' value={values.quantity} onChange={handleChange} />
           </label>
+          <span>{errors.quantity}</span>
         </div>
 
         <div>
-          <button>Place Order</button>
+          <button disabled={disabled}>Place Order</button>
         </div>
       </section>
     </form>

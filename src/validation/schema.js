@@ -14,7 +14,7 @@ const schema = yup.object().shape({
   'grilled-chicken': yup.boolean(),
   'gluten-free': yup.boolean(),
   instructions: yup.string().max(120, 'instructions must be less than 120 characters'),
-  quantity: yup.number(),
+  quantity: yup.number().min(1, 'quantity must be at least 1'),
 })
 
 export default schema
