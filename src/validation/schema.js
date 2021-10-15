@@ -13,19 +13,8 @@ const schema = yup.object().shape({
   'spicy-italian-sausage': yup.boolean(),
   'grilled-chicken': yup.boolean(),
   'gluten-free': yup.boolean(),
-  instructions: yup.string().max(120, 'instructions must be less than 120 characters'),
+  special: yup.string().max(120, 'instructions must be less than 120 characters'),
   quantity: yup.number().min(1, 'quantity must be at least 1'),
 })
 
 export default schema
-
-// name: '',
-// size: '',
-// pepperoni: false,
-// sausage: false,
-// 'canadian-bacon': false,
-// 'spicy-italian-sausage': false,
-// 'grilled-chicken': false,
-// 'gluten-free': false,
-// instructions: '',
-// quantity: 1,

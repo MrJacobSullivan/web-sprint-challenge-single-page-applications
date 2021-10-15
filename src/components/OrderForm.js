@@ -12,7 +12,7 @@ const initialValues = {
   'spicy-italian-sausage': false,
   'grilled-chicken': false,
   'gluten-free': false,
-  instructions: '',
+  special: '',
   quantity: 1,
 }
 
@@ -20,7 +20,7 @@ const initialErrors = {
   name: '', // required and greater than 2
   size: '', // required
   toppings: '', // no more than 3
-  instructions: '', // no longer than 120
+  special: '', // no longer than 120
   quantity: '', // not less than 1
 }
 
@@ -55,6 +55,24 @@ export default function OrderForm() {
 
   const handleSubmit = (event) => {
     event.preventDefault()
+
+    const orderData = {
+      name: values.name.trim(),
+      size: values.size,
+
+      // toppings
+      pepperoni: values.pepperoni,
+      sausage: values.sausage,
+      'canadian-bacon': values['canadian-bacon'],
+      'spicy-italian-sausage': values['spicy-italian-sausage'],
+      'grilled-chicken': values['grilled-chicken'],
+
+      'gluten-free': values['gluten-free'],
+      special: values.special,
+      quantity: values.quantity,
+    }
+
+    console.log(orderData)
 
     setValues(() => initialValues)
   }
@@ -165,13 +183,13 @@ export default function OrderForm() {
             Special Instructions
             <input
               type='text'
-              name='instructions'
-              value={values.instructions}
+              name='special'
+              value={values.special}
               onChange={handleChange}
               id='special-text'
             />
           </label>
-          <span>{errors.instructions}</span>
+          <span>{errors.special}</span>
         </div>
 
         <div>
